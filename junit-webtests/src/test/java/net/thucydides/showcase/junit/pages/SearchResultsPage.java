@@ -50,7 +50,7 @@ public class SearchResultsPage extends PageObject {
 
         listingCard.findBy(By.tagName("a")).click();
 
-        //waitForTextToAppear("Item details"); https://github.com/serenity-bdd/serenity-core/issues/357
+        waitForTextToAppear("Item details");
 
         return new ListingItem(name, price);
     }
