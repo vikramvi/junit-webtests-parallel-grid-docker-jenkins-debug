@@ -45,11 +45,12 @@ public class SearchResultsPage extends PageObject {
         String name = listingCard.findBy(".card-meta-row").getText();
         double price = Double.parseDouble(listingCard.findBy(".card-price").getText().split("\\s")[0].replace("$", "")
                 .replace("€", "")
+                .replace("£", "")
                 .replace(",", ""));
 
         listingCard.findBy(By.tagName("a")).click();
 
-        waitForTextToAppear("Item Details");
+        //waitForTextToAppear("Item details"); https://github.com/serenity-bdd/serenity-core/issues/357
 
         return new ListingItem(name, price);
     }
