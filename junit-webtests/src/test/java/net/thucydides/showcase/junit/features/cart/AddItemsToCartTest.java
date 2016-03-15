@@ -43,13 +43,17 @@ public class AddItemsToCartTest {
     
     @Test
     public void google_test(){
-    	WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://www.google.com");
-        WebElement element = driver.findElement(By.name("q"));
-        element.sendKeys("ChromeDriver");
-        element.submit();
-        driver.close();
+    	try{
+	    	WebDriver driver = new ChromeDriver();
+	        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	        driver.get("http://www.google.com");
+	        WebElement element = driver.findElement(By.name("q"));
+	        element.sendKeys("ChromeDriver");
+	        element.submit();
+	        driver.close();
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
     }
 }
 
