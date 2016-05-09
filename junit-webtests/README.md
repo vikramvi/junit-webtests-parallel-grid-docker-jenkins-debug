@@ -45,6 +45,7 @@ docker port stupefied_goldstine 5900
 
 # Commands to execute on Docker Grid
 
-mvn clean verify -Dskip.parallel=false -DskipITs -Dwebdriver.remote.url=http://xxx.xxx.xx.xxx:4444/wd/hub -Dwebdriver.remote.driver=chrome -Dwebdriver.remote.os=LINUX
-
+```
+mvn clean verify -Dskip.parallel=false -Dwebdriver.remote.url=http://xxx.xxx.xx.xxx:4444/wd/hub -Dwebdriver.remote.driver=chrome -Dwebdriver.remote.os=LINUX
+```
 
