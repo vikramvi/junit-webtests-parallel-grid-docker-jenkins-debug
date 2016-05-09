@@ -1,13 +1,16 @@
 package net.thucydides.showcase.junit.pages;
 
 import com.google.common.base.Function;
+
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 import net.thucydides.core.webdriver.WebDriverFacade;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.concurrent.TimeUnit;
@@ -15,8 +18,8 @@ import java.util.concurrent.TimeUnit;
 @DefaultUrl("https://www.etsy.com")
 public class HomePage extends PageObject {
 
-    @FindBy(css="button[value='Search']")
-    WebElementFacade searchButton;
+    @FindBy(xpath="//button[@class='btn btn-primary']|//button[@value='Search']|//button[@class='btn btn-orange btn-append']")
+    WebElement searchButton;
 
     private final static String SHOP_SUGGESTION = "//div[@class='as-suggestion' and contains(.,'find shop names')]";
 
@@ -43,7 +46,9 @@ public class HomePage extends PageObject {
     }
 
     public void search() {
-        searchButton.click();
+    	withAction().moveToElement($("//button[@class='btn btn-primary']|//button[@value='Search']|//button[@class='btn btn-orange btn-append']")).perform();
+    	//without above step , click is not happening at all
+    	searchButton.click();
     }
 
     public void searchForShopCalled(String shopName) {
