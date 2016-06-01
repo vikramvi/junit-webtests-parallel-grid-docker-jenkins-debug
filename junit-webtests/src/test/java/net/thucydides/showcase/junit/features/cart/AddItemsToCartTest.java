@@ -41,7 +41,7 @@ public class AddItemsToCartTest {
         buyer.should_see_total_including_shipping_for(selectedItem);
     }
     
-    @Test
+    /*@Test
     public void google_test(){
     	try{
 	    	WebDriver driver = new ChromeDriver();
@@ -54,6 +54,6 @@ public class AddItemsToCartTest {
     	}catch(Exception e){
     		e.printStackTrace();
     	}
-    }
+    }*/
 }
 
