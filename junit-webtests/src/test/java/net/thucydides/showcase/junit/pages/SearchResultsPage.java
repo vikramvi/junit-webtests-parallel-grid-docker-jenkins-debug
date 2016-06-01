@@ -22,7 +22,7 @@ public class SearchResultsPage extends PageObject {
     WebElementFacade regionalSettingsSaveButton;
 
     public String getSearchHeader() {
-        return $(".float-left .strong").getText();
+        return $("//div[@class='float-left']//span[@class='strong']").getText();
     }
 
     Pattern searchResultSummaryPattern = Pattern.compile("([\\d,]+) Results");
