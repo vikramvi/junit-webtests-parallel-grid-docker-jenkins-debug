@@ -12,9 +12,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <serenity.version>1.1.37-rc.6</serenity.version> <!-- https://bintray.com/serenity/maven/serenity-core/ -->
-        <serenity.maven.version>1.1.37-rc.6</serenity.maven.version>
-        <serenity.cucumber.version>1.1.9</serenity.cucumber.version> <!--  https://bintray.com/serenity/maven/serenity-cucumber/ -->
+        <serenity.version>1.5.3</serenity.version> <!-- https://bintray.com/serenity/maven/serenity-core/ -->
+        <serenity.maven.version>1.5.3</serenity.maven.version>
+        <serenity.cucumber.version>1.5.4</serenity.cucumber.version> <!--  https://bintray.com/serenity/maven/serenity-cucumber/ -->
     </properties>
 
     <!-- Define the Bintray repos for convenience -->
@@ -83,6 +83,7 @@
         </dependency>
     </dependencies>
     <build>
+    <pluginManagement>
         <plugins>
 
             <plugin>
@@ -104,7 +105,56 @@
                 </executions>
             </plugin>
 
-            <plugin>
+
+            <!--  cucumber-jvm-parallel-plugin POC -->
+		            <plugin>
+					    <groupId>com.github.temyers</groupId>
+					    <artifactId>cucumber-jvm-parallel-plugin</artifactId>
+					    <version>4.2.0</version>
+					    <executions>
+					        <execution>
+					            <id>generateRunners</id>
+					            <phase>generate-test-sources</phase>
+					            <goals>
+					                <goal>generateRunners</goal>
+					            </goals>
+					            <configuration>
+					                <glue>
+					                    <package>net.thucydides.showcase.cucumber.steps</package>
+					                </glue>
+					                <outputDirectory>${project.build.directory}/generated-test-sources/cucumber</outputDirectory>
+					                <featuresDirectory>src/test/resources/features/</featuresDirectory>
+					                <cucumberOutputDir>target/cucumber-parallel</cucumberOutputDir>
+					                <format>json,html</format>
+					                <tags>"~@ignored"</tags>
+					            </configuration>
+					        </execution>
+					    </executions>
+					</plugin>
+					<plugin>
+				    <groupId>org.apache.maven.plugins</groupId>
+					    <artifactId>maven-surefire-plugin</artifactId>
+					    <version>2.20</version>
+					    <executions>
+						     <execution>
+						          <!--    <id>acceptance-test</id>
+						             <phase>integration-test</phase>
+						             <goals>
+						                 <goal>test</goal>
+						             </goals> -->
+									    <configuration>
+									        <forkCount>10</forkCount>
+									        <reuseForks>true</reuseForks>
+									        <includes>
+									            <include>**/Parallel*IT.class</include>
+									        </includes>
+									    </configuration>
+								</execution>   
+							</executions>
+				</plugin>
+
+
+            <!-- <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.18</version>
@@ -121,7 +171,7 @@
                         <include>**/cucumber/*.java</include>
                     </includes>
                     <reuseForks>true</reuseForks>
-                    <!--<forkCount>2</forkCount>-->
+                    <forkCount>2</forkCount>
                     <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
                 </configuration>
                 <executions>
@@ -132,7 +182,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin> -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -164,5 +214,6 @@
                 </executions>
             </plugin>
         </plugins>
+        </pluginManagement>
     </build>
 </project>

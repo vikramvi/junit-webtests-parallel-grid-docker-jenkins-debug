@@ -45,8 +45,8 @@ public class SearchScenarioSteps {
     }
 
     private String pluralized(int count, String word) {
-        return Inflector.getInstance().pluralize(word, count);
-
+        //return Inflector.getInstance().pluralize(word, count);
+        return "random_string";
     }
 }
 

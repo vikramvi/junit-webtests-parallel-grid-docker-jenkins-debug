@@ -1,4 +1,4 @@
-package net.thucydides.showcase.cucumber.junit.shopping_cart;
+/*package net.thucydides.showcase.cucumber.junit.shopping_cart;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.*;
@@ -33,3 +33,4 @@ public class AddStuffToTheShoppingCartTest {
     }
 }
 
+*/
